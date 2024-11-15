@@ -1,0 +1,5386 @@
+{
+	"info": {
+		"_postman_id": "688cba16-a518-44fd-bcc6-2cd894ad8b38",
+		"name": "Kasir AJA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16796782"
+	},
+	"item": [
+		{
+			"name": "Registration",
+			"item": [
+				{
+					"name": "Register-Success With Valid Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns 201 OK status\", () => {\r",
+									"    pm.response.to.have.status(201)\r",
+									"})\r",
+									"pm.test(\"Return message succes\",()=>{\r",
+									"    var data = pm.response.json();\r",
+									"    pm.expect(data.message).to.eql(\"Toko berhasil didaftarkan\");\r",
+									"\r",
+									"})\r",
+									"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"})\r",
+									"var tamp = JSON.parse(responseBody)\r",
+									"pm.globals.set(\"email\",tamp.data.email)\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"{{password}}\"\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/registration",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register-Success With Valid Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"{{password}}\"\r\n    }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/registration",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 13 Nov 2024 13:47:38 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "130"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "vary",
+									"value": "origin"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=kCUpfk6UDUom814RZck8DwDxa386wSdz%2F4Luu3XAjxw7hiafYhXDf0zjjUo5YqAIbFvESLXs72Y04qQTyDlcZvuXsp9ecrDmXDSh%2BVP4x%2Bz%2BGLwE2zTboWeral0HIcoFKHdf2WHQQQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8e1f36fa39b13d92-SIN"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								},
+								{
+									"key": "server-timing",
+									"value": "cfL4;desc=\"?proto=TCP&rtt=34883&sent=68&recv=69&lost=0&retrans=0&sent_bytes=4204&recv_bytes=1409&delivery_rate=90443&cwnd=252&unsent_bytes=0&cid=5dc27f0d0b5943b6&ts=65666&x=0\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Toko berhasil didaftarkan\",\n    \"data\": {\n        \"name\": \"Brittany Kunde\",\n        \"email\": \"Rachelle_Krajcik37@gmail.com\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Register-Missing Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns 400 Bad Request\", () => {\r",
+									"    pm.response.to.have.status(400)\r",
+									"})\r",
+									"pm.test(\"Return message missing email \", ()=>{\r",
+									"    var data = pm.response.json();\r",
+									"    pm.expect(data.message).to.eql(\"\\\"email\\\" is not allowed to be empty\");\r",
+									"\r",
+									"})\r",
+									"pm.test(\"Respon time is less than 600\", ()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"email\": \"\",\r\n        \"password\": \"validpassword\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/registration",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register-Missing Email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"email\": \"\",\r\n        \"password\": \"validpassword\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/registration",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "origin,User-Agent"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache"
+								},
+								{
+									"key": "content-length",
+									"value": "66"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 07 Nov 2024 13:48:40 GMT"
+								},
+								{
+									"key": "server",
+									"value": "LiteSpeed"
+								},
+								{
+									"key": "platform",
+									"value": "hostinger"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"email\\\" is not allowed to be empty\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register-Mising Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns 400 Bad Request\", () => {\r",
+									"    pm.response.to.have.status(400)\r",
+									"})\r",
+									"pm.test(\"Return message missing name \", ()=>{\r",
+									"    var data = pm.response.json();\r",
+									"    pm.expect(data.message).to.eql(\"\\\"name\\\" is not allowed to be empty\");\r",
+									"\r",
+									"})\r",
+									"pm.test(\"Respon time is less than 200\", ()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"})\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"validpassword\"\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/registration",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register-Mising Name",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\": \"\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"validpassword\"\r\n    }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/registration",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "origin,User-Agent"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache"
+								},
+								{
+									"key": "content-length",
+									"value": "65"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 07 Nov 2024 13:49:54 GMT"
+								},
+								{
+									"key": "server",
+									"value": "LiteSpeed"
+								},
+								{
+									"key": "platform",
+									"value": "hostinger"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"name\\\" is not allowed to be empty\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register-Mising Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns 400 Bad Request\", () => {\r",
+									"    pm.response.to.have.status(400)\r",
+									"})\r",
+									"pm.test(\"Return message missing name \", ()=>{\r",
+									"    var data = pm.response.json();\r",
+									"    pm.expect(data.message).to.eql(\"\\\"password\\\" is not allowed to be empty\");\r",
+									"\r",
+									"})\r",
+									"pm.test(\"Respon time is less than 600\", ()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"})\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"\"\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/registration",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register-Mising Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"\"\r\n    }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/registration",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "origin,User-Agent"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache"
+								},
+								{
+									"key": "content-length",
+									"value": "69"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 07 Nov 2024 13:50:51 GMT"
+								},
+								{
+									"key": "server",
+									"value": "LiteSpeed"
+								},
+								{
+									"key": "platform",
+									"value": "hostinger"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"password\\\" is not allowed to be empty\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register-Invalid Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns 400 Bad Request\", () => {\r",
+									"    pm.response.to.have.status(400)\r",
+									"})\r",
+									"pm.test(\"Return message invalid email format \", ()=>{\r",
+									"    var data = pm.response.json();\r",
+									"    pm.expect(data.message).to.eql(\"\\\"email\\\" must be a valid email\");\r",
+									"\r",
+									"})\r",
+									"pm.test(\"Respon time is less than 800\", ()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+									"})\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"Bila\",\r\n        \"email\": \"testuser2@example\",\r\n        \"password\": \"\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/registration",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register-Invalid Email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\": \"Bila\",\r\n        \"email\": \"testuser2@example\",\r\n        \"password\": \"\"\r\n    }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/registration",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "origin,User-Agent"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache"
+								},
+								{
+									"key": "content-length",
+									"value": "61"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Nov 2024 16:24:52 GMT"
+								},
+								{
+									"key": "server",
+									"value": "LiteSpeed"
+								},
+								{
+									"key": "platform",
+									"value": "hostinger"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"email\\\" must be a valid email\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register-Invalid data type name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns 400 Bad Request\", () => {\r",
+									"    pm.response.to.have.status(400)\r",
+									"})\r",
+									"pm.test(\"Return message invalid email format \", ()=>{\r",
+									"    var data = pm.response.json();\r",
+									"\r",
+									"    pm.expect(data.message).to.eql(\"\\\"name\\\" must be a string\");\r",
+									"\r",
+									"})\r",
+									"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"})\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": 123,\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"validpassword\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/registration",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register-Invalid data type name",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\": 123,\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"validpassword\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/registration",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "origin,User-Agent"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache"
+								},
+								{
+									"key": "content-length",
+									"value": "55"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 07 Nov 2024 13:52:50 GMT"
+								},
+								{
+									"key": "server",
+									"value": "LiteSpeed"
+								},
+								{
+									"key": "platform",
+									"value": "hostinger"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"name\\\" must be a string\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register-Invalid data type  password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns 400 Bad Request\", () => {\r",
+									"    pm.response.to.have.status(400)\r",
+									"})\r",
+									"pm.test(\"Return message invalid email format \", ()=>{\r",
+									"    var data = pm.response.json();\r",
+									"\r",
+									"    pm.expect(data.message).to.eql(\"\\\"password\\\" must be a string\");\r",
+									"\r",
+									"})\r",
+									"pm.test(\"Respon time is less than 1000\", ()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"123\",\r\n        \"email\": \"testuser2@example.com\",\r\n        \"password\": 7579437475\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/registration",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register-Invalid data type  password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\": \"123\",\r\n        \"email\": \"testuser2@example.com\",\r\n        \"password\": 7579437475\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/registration",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "origin,User-Agent"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache"
+								},
+								{
+									"key": "content-length",
+									"value": "59"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 07 Nov 2024 13:54:30 GMT"
+								},
+								{
+									"key": "server",
+									"value": "LiteSpeed"
+								},
+								{
+									"key": "platform",
+									"value": "hostinger"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"password\\\" must be a string\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register-Invalid data type email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns 400 Bad Request\", () => {\r",
+									"    pm.response.to.have.status(400)\r",
+									"})\r",
+									"pm.test(\"Return message invalid email format \", ()=>{\r",
+									"    var data = pm.response.json();\r",
+									"\r",
+									"    pm.expect(data.message).to.eql(\"\\\"email\\\" must be a string\");\r",
+									"\r",
+									"})\r",
+									"pm.test(\"Respon time is less than 1000\", ()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"123\",\r\n        \"email\": 1213,\r\n        \"password\": \"validpassword\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/registration",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register-Invalid data type email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\": \"123\",\r\n        \"email\": 1213,\r\n        \"password\": \"validpassword\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/registration",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "origin,User-Agent"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache"
+								},
+								{
+									"key": "content-length",
+									"value": "56"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 07 Nov 2024 13:55:19 GMT"
+								},
+								{
+									"key": "server",
+									"value": "LiteSpeed"
+								},
+								{
+									"key": "platform",
+									"value": "hostinger"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"email\\\" must be a string\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {\r",
+									" \r",
+									"    var tamp = JSON.parse(responseBody)\r",
+									"    // var token = tamp.data.accessToken; \r",
+									"   pm.globals.set(\"bearerToken\", tamp.data.accessToken);\r",
+									"   pm.globals.set(\"refreshToken\",tamp.data.refreshToken)\r",
+									"   \r",
+									"}\r",
+									"\r",
+									"pm.test(\"Returns 201 OK status\", () => {\r",
+									"    pm.response.to.have.status(201)\r",
+									"})\r",
+									"pm.test(\"Return message succes\",()=>{\r",
+									"    var data = pm.response.json();\r",
+									"    pm.expect(data.message).to.eql(\"Authentication berhasil ditambahkan\");\r",
+									"\r",
+									"})\r",
+									"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"{{email}}\",\r\n   \"password\": \"{{password}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/authentications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"authentications"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"email\": \"{{email}}\",\r\n   \"password\": \"{{password}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/authentications",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"authentications"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 15 Nov 2024 14:01:36 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "831"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "vary",
+									"value": "origin"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=KvBAfOEk9OOT4z8Auvt9TrgR6ZwNcqJS%2FV7QrRHF1RI5tYSnCNyoicH0z9i25S3A0RYve%2BgJhvZ78BTq9gVCuk1Mc%2F8z68SkQqqGm%2FpzfQRqzknNYklwFjbnxneH2Ddgh6wI8XO1mg%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8e2fc62abd524993-SIN"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								},
+								{
+									"key": "server-timing",
+									"value": "cfL4;desc=\"?proto=TCP&rtt=48316&sent=170&recv=162&lost=0&retrans=0&sent_bytes=41135&recv_bytes=22948&delivery_rate=155421&cwnd=257&unsent_bytes=0&cid=7a287be8b02595b0&ts=118141&x=0\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Authentication berhasil ditambahkan\",\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MmQyZDg2LTAyODMtNDBmOC1iZmE0LTU4OTIzNDg3OThkOSIsImNvbXBhbnlJZCI6IjU4NWFiOGJmLTU1MjQtNDE5Ny1iYTZkLTI2ZGM0YjVkMmJlZiIsImlhdCI6MTczMTY3OTI5NX0.IRlZgku2EkiVWQwaTJs4T_JQp0KZmp-K7MXeGC9vvCI\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MmQyZDg2LTAyODMtNDBmOC1iZmE0LTU4OTIzNDg3OThkOSIsImNvbXBhbnlJZCI6IjU4NWFiOGJmLTU1MjQtNDE5Ny1iYTZkLTI2ZGM0YjVkMmJlZiIsImlhdCI6MTczMTY3OTI5NX0.tH-Nu2H-ajQi7LaTKL9pz7ag4slMEQ1uGpuuuVgxs5w\",\n        \"user\": {\n            \"id\": \"672d2d86-0283-40f8-bfa4-5892348798d9\",\n            \"name\": \"Bertha Huels\",\n            \"role\": \"admin\",\n            \"email\": \"Jaeden.Walker@yahoo.com\",\n            \"officeid\": \"1422c614-6990-41d4-9fc1-7e31e94e0631\",\n            \"companyid\": \"585ab8bf-5524-4197-ba6d-26dc4b5d2bef\",\n            \"company_name\": \"Bertha Huels\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login Invalid Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Returns 401 Unaothorized\", () => {\r",
+									"    pm.response.to.have.status(401)\r",
+									"})\r",
+									"pm.test(\"Return message fail\",()=>{\r",
+									"    var data = pm.response.json();\r",
+									"    pm.expect(data.message).to.eql(\"Kredensial yang Anda berikan salah\");\r",
+									"\r",
+									"})\r",
+									"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"{{email}}\",\r\n   \"password\": \"passkuue\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/authentications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"authentications"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login Invalid Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"email\": \"{{email}}\",\r\n   \"password\": \"passkuue\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/authentications",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"authentications"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 15 Nov 2024 14:05:21 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "vary",
+									"value": "origin"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=IVS%2FGM20%2Fh5bN6Jp75MQmC6yWpbpZFZhfv58Ax9%2Bz1zgSMo7a7iUGcQPz%2FdF1YD23wCmxhhx3pYIk8%2Bdqzih%2BoCHOBXdTo0CMtJTYLQLGuOOwsO66D9Ywda%2FIdNSRfIaN848r2v7jw%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8e2fcbaa2cf64993-SIN"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								},
+								{
+									"key": "server-timing",
+									"value": "cfL4;desc=\"?proto=TCP&rtt=65674&sent=445&recv=429&lost=0&retrans=1&sent_bytes=83300&recv_bytes=45790&delivery_rate=155421&cwnd=257&unsent_bytes=0&cid=7a287be8b02595b0&ts=343231&x=0\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"fail\",\n    \"message\": \"Kredensial yang Anda berikan salah\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login Invalid Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Returns 401 Unaothorized\", () => {\r",
+									"    pm.response.to.have.status(401)\r",
+									"})\r",
+									"pm.test(\"Return message fail\",()=>{\r",
+									"    var data = pm.response.json();\r",
+									"    pm.expect(data.message).to.eql(\"Kredensial yang Anda berikan salah\");\r",
+									"\r",
+									"})\r",
+									"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"aku@mail.com\",\r\n   \"password\": \"{{password}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/authentications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"authentications"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login Invalid Email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"email\": \"aku@mail.com\",\r\n   \"password\": \"{{password}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/authentications",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"authentications"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 15 Nov 2024 14:03:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "vary",
+									"value": "origin"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=bIk3j65yX5rgoiV%2FjD5Lt7xhKiOxWL9lSJ4V5i4EnY93Ukr7uJE2T6w54oU2bk%2BzRXwJ0NN5duAIgu4oSnORNe3gW6dQULm8A5E0HDuZKoGCd%2B3Aiz3PEp7bLMK1ItNSGe1M2RV%2FaQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8e2fc95d8c4d4993-SIN"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								},
+								{
+									"key": "server-timing",
+									"value": "cfL4;desc=\"?proto=TCP&rtt=62617&sent=350&recv=334&lost=0&retrans=1&sent_bytes=80296&recv_bytes=44315&delivery_rate=155421&cwnd=257&unsent_bytes=0&cid=7a287be8b02595b0&ts=248442&x=0\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"fail\",\n    \"message\": \"Kredensial yang Anda berikan salah\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Add Categories",
+					"item": [
+						{
+							"name": "Add Categories",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 201 OK status\", () => {\r",
+											"    pm.response.to.have.status(201)\r",
+											"})\r",
+											"pm.test(\"Return message succes\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"Category berhasil ditambahkan\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"var tamp = JSON.parse(responseBody)\r",
+											"pm.globals.set(\"categoryId\",tamp.data.categoryId)\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"{{$randomLoremSlug}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/categories",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Add Categories",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"{{$randomLoremSlug}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/categories",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"categories"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 13:16:39 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "150"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=m36YIppBjy1JfYuDJbwDSHdncPn8eFEFYwLZbw2%2B3GQgcpkAqA8wKhTlU%2BMjvvRuLVwvvKzHeyPnqeeZmYxWk3uDvSAtbaZNpmMtFu%2F5hW41%2FFjTNLiyZHnqoXOAKScn8Zo7lcJXdQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e2746f75b9d40aa-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=25408&sent=46&recv=45&lost=0&retrans=0&sent_bytes=5002&recv_bytes=1623&delivery_rate=170971&cwnd=254&unsent_bytes=0&cid=69765754e68c955b&ts=41542&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Category berhasil ditambahkan\",\n    \"data\": {\n        \"categoryId\": \"466138ff-e411-4ef8-a7fc-699b585332e9\",\n        \"name\": \"quaerat-aut-illum\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Add Categories-Missing Name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 400 Bad Request\", () => {\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"pm.test(\"Return message succes\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"\\\"name\\\" is not allowed to be empty\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/categories",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Add Categories Copy",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/categories",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"categories"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 13:20:29 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "65"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=xGeykGCGp%2F%2FCEHL5FYC8%2BVEITVeU4ynrvCXILQT%2B005Guuv97W4pv6s23tIPv%2B0mgIPgUhflpOKhkgbjDrlEyCi6MZs%2Bts49uaTV7dEvEa2ZE1h%2BXZHb2FHRz47FJRoweat6CRv0jA%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e274c98d8ee91b7-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=90070&sent=94&recv=94&lost=0&retrans=0&sent_bytes=7264&recv_bytes=3724&delivery_rate=136901&cwnd=256&unsent_bytes=0&cid=322517f3f574ac62&ts=87216&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"name\\\" is not allowed to be empty\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "View Categories",
+					"item": [
+						{
+							"name": "Get Categories Detail- Invalid ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 404 Not found status\", () => {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Return message fail\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"Category tidak ditemukan\");\r",
+											"\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/categories/{6acba370-e229-4623-9ee6-2f689f77a1fe}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categories",
+										"{6acba370-e229-4623-9ee6-2f689f77a1fe}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Categories Detail",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/categories/6acba370-e229-4623-9ee6-2f689f77a1fe",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"categories",
+												"6acba370-e229-4623-9ee6-2f689f77a1fe"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 13:42:40 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=tM2lpXRI2uByh76hKx6SCqGis9ycSpeB17vDBtPvLXed7zLrqcqfyK%2FIOENhWabdtAHlHKsNtz8kV5eOmwgRNl6h%2F4g14G4V%2BDD%2BChMvezXfLQ3N%2FPQLjBClQXNRLq09eskdOZuDhA%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e276d13efc94035-SIN"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=37591&sent=4&recv=5&lost=0&retrans=0&sent_bytes=2804&recv_bytes=1138&delivery_rate=53644&cwnd=251&unsent_bytes=0&cid=1537b2f73c57637f&ts=247&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"Category tidak ditemukan\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Get All Categories",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 200 OK status\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/categories",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/categories",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"categories"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 13:33:01 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "vary",
+											"value": "origin,accept-encoding"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=TGL7bUSW2u26hABvz8ot7P63V3FFl956dwoCk4mKc6m4xFa%2Fz07VursW3sf%2F9uS%2B2uNefpLd3eNSbTtoHTkqpdmEFbqpz7R%2F%2FkKpW9Sc5wKyvtMIPff7noymt%2FRu5xvaddOjhMFJhQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e275ef589ca4acc-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=49848&sent=456&recv=452&lost=0&retrans=0&sent_bytes=18296&recv_bytes=9909&delivery_rate=130728&cwnd=257&unsent_bytes=0&cid=5ff7d8c209e7597a&ts=448349&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"categories\": [\n            {\n                \"id\": \"190f4d0f-2006-49ec-80d6-a2b5e674ca5e\",\n                \"name\": \"amet-qui-delectus\",\n                \"description\": \"\"\n            },\n            {\n                \"id\": \"83eed646-44b8-4c78-a705-0841cf9cd352\",\n                \"name\": \"impedit-expedita-quos\",\n                \"description\": null\n            },\n            {\n                \"id\": \"2432e3a3-121c-4c2f-8a9a-a0802b166207\",\n                \"name\": \"exercitationem-ea-ipsa\",\n                \"description\": \"\"\n            },\n            {\n                \"id\": \"466138ff-e411-4ef8-a7fc-699b585332e9\",\n                \"name\": \"quaerat-aut-illum\",\n                \"description\": \"regional\"\n            },\n            {\n                \"id\": \"ddc323a3-2f5e-485c-a890-dadf2c0539bd\",\n                \"name\": \"facere-rerum-quia\",\n                \"description\": \"incremental\"\n            },\n            {\n                \"id\": \"cb8f7bf5-4d89-4f67-8f61-9a5a0e49b55e\",\n                \"name\": \"odit-modi-sit\",\n                \"description\": \"user-facing\"\n            },\n            {\n                \"id\": \"49cec864-f516-444c-97b9-d0ba1c54fff9\",\n                \"name\": \"et-ea-dolores\",\n                \"description\": \"object-oriented\"\n            },\n            {\n                \"id\": \"f99d83ef-e6da-4a0f-9f12-2332c9fb7f91\",\n                \"name\": \"omnis-qui-quis\",\n                \"description\": \"demand-driven\"\n            },\n            {\n                \"id\": \"8e3e131e-c6f4-43bc-86ec-90527b6a770d\",\n                \"name\": \"rerum-voluptatibus-iure\",\n                \"description\": \"upward-trending\"\n            },\n            {\n                \"id\": \"406c4de0-d8f4-4eb1-b895-35a92e3548a4\",\n                \"name\": \"Palladium\",\n                \"description\": \"bottom-line\"\n            }\n        ],\n        \"meta\": {\n            \"totalPages\": 3,\n            \"total\": \"27\",\n            \"page\": 1\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Categories Detail valid id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 200 OK status\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/categories/{{{categoryId}}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categories",
+										"{{{categoryId}}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Categories Detail valid id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/categories/{{{categoryId}}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"categories",
+												"{{{categoryId}}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 14:28:38 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=Iukl6N9XKTsq7IIkkwk%2BpLtCFv8F0agzTtB58%2BxgTptPxKWhpeteyfiVe1qzTg00MrYP1a8gzbQQln2cjCiRJ9fPWfHcNXm%2BsTZEH%2BFOv8O%2F46HKKKLA3l48K2bWrzpDFB%2B3fWoRFA%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27b06dba80ce11-SIN"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=27233&sent=16&recv=15&lost=0&retrans=0&sent_bytes=5316&recv_bytes=2348&delivery_rate=178237&cwnd=255&unsent_bytes=0&cid=14e6af2fcc6f7e50&ts=7378&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"category\": {\n            \"name\": \"id-soluta-quia\",\n            \"description\": \"bifurcated\"\n        }\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Update Categories",
+					"item": [
+						{
+							"name": "Update Categories",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 200 OK status\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"update{{$randomLoremText}}\",\r\n   \"description\": \"update{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/categories/{{{categoryId}}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categories",
+										"{{{categoryId}}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update Categories",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"update {{$randomLoremText}}\",\r\n   \"description\": \"update {{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/categories/{{{categoryId}}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"categories",
+												"{{{categoryId}}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 13:27:57 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=8e4Xmklc4u%2F5P3o2qQkAxPQj27BL39lIFYWLXAhnfkE6FhuaBEhaLL%2B3fER%2FP8owLcJrQgS7076VetLt5LAxbaKHcYgwO0xVzBwvxbYfG%2BA9DiZBVN%2B3D6OO92zc1svyUL%2BZlAPYlQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e275789f8224acc-SIN"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=35431&sent=150&recv=149&lost=0&retrans=0&sent_bytes=7422&recv_bytes=4523&delivery_rate=130728&cwnd=257&unsent_bytes=0&cid=5ff7d8c209e7597a&ts=144401&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"name\": \"update Non ut impedit in ullam aut autem. Consequatur tempore eum.\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Categories- Missing Name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 400 Bad Request\", () => {\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"pm.test(\"Return message fail\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"\\\"name\\\" is not allowed to be empty\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"\",\r\n   \"description\": \"update {{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/categories/{{{categoryId}}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categories",
+										"{{{categoryId}}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update Categories Copy",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"\",\r\n   \"description\": \"update {{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/categories/{{{categoryId}}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"categories",
+												"{{{categoryId}}}"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 13:29:51 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "65"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=WwcVb9w2tSiWbHNz22hlM8a6fGAR0HHA11V4gQ92vuuj3%2BxNzPNxb9vDuEUKAgqKpMKlPRPatlAaVss4oGKcO2hiE7GiFQSnHTv2VQ0UTDjiUMNcRRsoTHdnCAEnBDqS1L86PjTE%2BQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e275a519a5c4acc-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=44533&sent=261&recv=259&lost=0&retrans=0&sent_bytes=10470&recv_bytes=6552&delivery_rate=130728&cwnd=257&unsent_bytes=0&cid=5ff7d8c209e7597a&ts=258134&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"name\\\" is not allowed to be empty\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Delete Categories",
+					"item": [
+						{
+							"name": "delete categories",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 200 OK status\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/categories/{{{categoryId}}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categories",
+										"{{{categoryId}}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "delete categories",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/categories/{{{categoryId}}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"categories",
+												"{{{categoryId}}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Wed, 13 Nov 2024 14:52:18 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "30"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=jAfcNeNqQeFBHB5lixXT05xypFVoZNGDJXGBCSvkoZwkw7JwC3DnUw1vEqaojNblylVhgOViwNV0xWIn3DO%2BJbf5Ddso1JxX%2BOgpgqb8kkekZtdpKagJJFsK3IJ4GliRKPjdU1Ny4w%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e1f95b779d3969e-KIX"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=104844&sent=4&recv=5&lost=0&retrans=0&sent_bytes=2805&recv_bytes=1147&delivery_rate=26507&cwnd=252&unsent_bytes=0&cid=c5337eefbab8305d&ts=554&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"data\": {}\n}"
+								}
+							]
+						},
+						{
+							"name": "delete categories Invalid Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 404 Not found status\", () => {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											"\r",
+											"\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/categories/{{categoryId}}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categories",
+										"{{categoryId}}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "delete categories invalid id",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/categories/{{categoryId}}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"categories",
+												"{{categoryId}}}"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 14:29:58 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "44"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=GvL9TY8S9q29yP1ZOPLvx220AlnXDCZhZQzIw6HhWU5eWTfNKvqx7CqZzHrec6BvIUr1f7u0a2jzz%2F56tmOKv3ja3XtZaUw561FT%2BTidS67NvOclrpLrpxUL20POubJzg8Cv5wEalg%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27b2635e14ce11-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=35106&sent=99&recv=97&lost=0&retrans=0&sent_bytes=8266&recv_bytes=4043&delivery_rate=178237&cwnd=257&unsent_bytes=0&cid=14e6af2fcc6f7e50&ts=87658&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"id tidak valid\"\n}"
+								}
+							]
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{bearerToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Add Customer",
+					"item": [
+						{
+							"name": "Add Customer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 201 OK status\", () => {\r",
+											"    pm.response.to.have.status(201)\r",
+											"})\r",
+											"pm.test(\"Return message succes\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"Customer berhasil ditambahkan\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"var tamp = JSON.parse(responseBody)\r",
+											"pm.globals.set(\"customerId\",tamp.data.customerId)\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Add Customer",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 14:30:18 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "146"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=1oKQgPq9pmXa8i87zJQC3WUgBQrIknlXJWnaO3oh54%2Fi91th9ye6K6usVQU%2BzI4ayNnUFdE9EtgMGG32h1BK1%2FysSh6TEaK94K9zihALchPgDi%2FcVoLAh5HBAu8U8Eyrb6ZVmGO7UQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27b2dc8f55ce11-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=38352&sent=119&recv=117&lost=0&retrans=0&sent_bytes=9227&recv_bytes=4751&delivery_rate=178237&cwnd=257&unsent_bytes=0&cid=14e6af2fcc6f7e50&ts=107164&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Customer berhasil ditambahkan\",\n    \"data\": {\n        \"customerId\": \"d3a2cd06-9531-46a5-b2aa-aad592fd9580\",\n        \"name\": \"Alvin Sanford\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Add Customer-Missing Name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 400 Bad Request\", () => {\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"pm.test(\"Return message fail\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"\\\"name\\\" is not allowed to be empty\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Add Customer Copy",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 14:34:07 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "65"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=NwPm1R6t04It75d9T2PIoe%2BwKB%2FQzfMsFOVtjvAHbcGnI93sHFkt31I8Lrmgye2b8rFWLIEjz6xGYwVYT0jRCqz09p5axooNFQXUuxyNptXo4ouNYR70FlO8NguQhYU2%2BlKFcPxPHA%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27b8752c9dce67-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=34415&sent=18&recv=19&lost=0&retrans=0&sent_bytes=4200&recv_bytes=1985&delivery_rate=96149&cwnd=252&unsent_bytes=0&cid=ad31fc894fcc9c33&ts=12578&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"name\\\" is not allowed to be empty\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Add Customer-Name Invalid Data Type",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 400 Bad Request\", () => {\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"pm.test(\"Return message fail\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"\\\"name\\\" must be a string\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": 123,\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Add Customer-Name Invalid Data type",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": 123,\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 14:41:35 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "55"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=EzQQtA%2FGizjG4I6XMNQqG7FAn2KB%2BOq8j3YCtf1EBXhdGlhWzXIF%2FnlGp3sbkYPrgFHnhYonJZzepNxS%2FS%2BG3VJkXkhdXJP%2FxVr21F00jBbzs5oZ2i3ZYg3yJ51GpWFK8o%2FrzEHUzQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27c364f9549cbd-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=55045&sent=210&recv=211&lost=0&retrans=0&sent_bytes=11187&recv_bytes=6608&delivery_rate=104422&cwnd=257&unsent_bytes=0&cid=a26ccc441547862c&ts=202618&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"name\\\" must be a string\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Add Custome - Invalid Phone Number",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 400 Bad Request\", () => {\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"pm.test(\"Return message fail\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"\\\"phone\\\" must be a number\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"{{$randomAlphaNumeric}}\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Add Customer-Invalid Phone Number",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"{{$randomAlphaNumeric}}\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 14:45:05 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "56"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=bvhOwH7BwPWVPJGwB5ecQlRk8WrXp9%2FWGCWpmWFVYeXqhYllEkkPq9g4WmWAwbq3fb6AUA3ddxm3LKMAieTLEL%2BhDK37TelvWJrLCAwl%2B%2BqR3loym3vKbd9VGrQM4ktb9VvIGSvJBA%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27c8850c9dcdf9-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=40081&sent=131&recv=131&lost=0&retrans=0&sent_bytes=8343&recv_bytes=4786&delivery_rate=129505&cwnd=257&unsent_bytes=0&cid=56744015f3f26dcf&ts=122998&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"phone\\\" must be a number\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Add Customer- Invalida Adress data type",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 400 Bad Request\", () => {\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"pm.test(\"Return message fail\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"\\\"address\\\" must be a string\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": 123,\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Add Customer-Invalid Adress Data Type",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": 123,\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 14:46:45 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "58"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=wxAFU8iFnaXQ35VESiSJ6Dyluub3P72FueO8VxKa2Ee73o9KRPkr1d0zvbyKuGflWxqIXfKVeS6tN9AhcSCdCWCKqg1rR44eONfIn7vAvscVo8SjAgZzIRDQSmg%2BZx6cHJr9mX05Ig%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27caf47fc7ce2b-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=35499&sent=20&recv=22&lost=0&retrans=0&sent_bytes=4197&recv_bytes=1971&delivery_rate=99129&cwnd=252&unsent_bytes=0&cid=df3728345ef2865c&ts=16394&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"address\\\" must be a string\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Add Customer- Invalid Description Data Type",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 400 Bad Request\", () => {\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"pm.test(\"Return message fail\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"\\\"description\\\" must be a string\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": 1213124\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Add Customer- Invalidadress data type Copy",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": 1213124\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 14:50:53 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "62"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=%2BPylGTYV0sz7n%2F0ilQURSs1CkkGFDQ5Fdgpz52wAu%2FxWSNXgoWZVpIN3nR4eLcfjCvQNuIfrykiCnyZdVX9cjFy5Sln05JOZyYsuXg9CmA79B%2Fx9BIetaKCQdAYwY1q0LyY6Y0KRSQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27d1074b3991b4-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=29037&sent=22&recv=23&lost=0&retrans=0&sent_bytes=4201&recv_bytes=1985&delivery_rate=119605&cwnd=252&unsent_bytes=0&cid=028e3b8d48ab7325&ts=16951&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"description\\\" must be a string\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "View Customer",
+					"item": [
+						{
+							"name": "Get All Customer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 200 OK status\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n   \"phone\": \"{{$randomPhoneNumber}}\"\r\n   \"address\": \"{{$randomStreetAddress}}\"\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get All Customer",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n   \"phone\": \"{{$randomPhoneNumber}}\"\r\n   \"address\": \"{{$randomStreetAddress}}\"\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 15:06:34 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "vary",
+											"value": "origin,accept-encoding"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=2hDS4VQvGtpPel6rC834MVkzfY%2FMQ47TQxhTEjyz42%2FXR3v0b%2FS2LH6dDHdfj%2Br31MPx9v%2FmwPWFpUT7uyAYwl%2BO94qFIAZdzTMU%2FKNZoG3GQwBtYVOZlXcgENyk%2BoX8QAVz9ePinA%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27e7ff3ef89b9f-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=33809&sent=141&recv=138&lost=0&retrans=0&sent_bytes=11214&recv_bytes=5958&delivery_rate=124504&cwnd=257&unsent_bytes=0&cid=bb02e314c147b913&ts=128152&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"customers\": [\n            {\n                \"id\": \"eedae2ec-7c0d-4c2e-8ada-611a658d2fcc\",\n                \"name\": \"Teri Beier\",\n                \"phone\": \"4\",\n                \"description\": \"fresh-thinking\"\n            },\n            {\n                \"id\": \"e90def38-d931-4095-b846-8c42d1076c4d\",\n                \"name\": \"Morris Greenholt\",\n                \"phone\": \"081234567890111\",\n                \"description\": \"optimal\"\n            },\n            {\n                \"id\": \"54f4fa34-627d-42cf-9230-49532361d66c\",\n                \"name\": \"Cristina Block\",\n                \"phone\": \"081234567890\",\n                \"description\": \"\"\n            },\n            {\n                \"id\": \"b31cd95f-7f50-4c63-b9a4-18440ee7be01\",\n                \"name\": \"Dr. Mildred O'Conner\",\n                \"phone\": \"081234567890\",\n                \"description\": \"\"\n            },\n            {\n                \"id\": \"f2dcc8f9-6e4f-4d8f-b77d-099ccb300bb4\",\n                \"name\": \"Conrad Gaylord\",\n                \"phone\": \"081234567890\",\n                \"description\": \"uniform\"\n            },\n            {\n                \"id\": \"e234f6aa-3a6b-4eb3-992c-01915b961b64\",\n                \"name\": \"Dr. Pedro Hessel\",\n                \"phone\": \"081234567890\",\n                \"description\": \"interactive\"\n            },\n            {\n                \"id\": \"c85dedbc-db47-4f77-b92a-b90adb0bd2ba\",\n                \"name\": \"Erma O'Hara\",\n                \"phone\": \"081234567890\",\n                \"description\": \"executive\"\n            },\n            {\n                \"id\": \"33f48eba-ccae-41a5-bd28-f3154bc313ea\",\n                \"name\": \"Lola Howell V\",\n                \"phone\": \"081234567890\",\n                \"description\": \"contextually-based\"\n            },\n            {\n                \"id\": \"c5fd93bc-1a61-45c9-809a-9564db13d73b\",\n                \"name\": \"Roman Powlowski\",\n                \"phone\": \"081234567890\",\n                \"description\": \"uniform\"\n            },\n            {\n                \"id\": \"dd53a98c-5215-4149-98e9-1fe2543851b9\",\n                \"name\": \"Budi\",\n                \"phone\": null,\n                \"description\": \"Budi anak Pak Edi\"\n            }\n        ],\n        \"meta\": {\n            \"totalPages\": 2,\n            \"total\": \"11\",\n            \"page\": 1\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Detail Customer - valid Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 200 OK status\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n   \"phone\": \"{{$randomPhoneNumber}}\"\r\n   \"address\": \"{{$randomStreetAddress}}\"\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers/{{customerId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers",
+										"{{customerId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Detail Customer - valid Id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n   \"phone\": \"{{$randomPhoneNumber}}\"\r\n   \"address\": \"{{$randomStreetAddress}}\"\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/{{customerId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"{{customerId}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Fri, 15 Nov 2024 13:14:44 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=vXsrRjpDDQ%2BoMZguL3oVQ7eA%2Fc3cWjTDlTpGRsZJbL%2BOYofqlq2cNM1sYMKEQ3bF0rxEy0BKv7WPaS7Afyai7eflqmU0NjBc7cn1deWTnsJsoeEgpXl03lJ2B6wi5%2BYM0q9SCKbFPg%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e2f818a6e1b4c6b-SIN"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=31550&sent=204&recv=198&lost=0&retrans=0&sent_bytes=12462&recv_bytes=6886&delivery_rate=112842&cwnd=257&unsent_bytes=0&cid=8f97c4a1e688a6d1&ts=194566&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"customer\": {\n            \"name\": \"Felicia Russel\",\n            \"phone\": \"081234567890\",\n            \"address\": \"1001 Percy Hills\",\n            \"description\": \"mission-critical\"\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Detail Customer - Invalid ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 404 Not Found status\", () => {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"pm.test(\"Return message fail\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"Customer tidak ditemukan\");\r",
+											"\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n   \"phone\": \"{{$randomPhoneNumber}}\"\r\n   \"address\": \"{{$randomStreetAddress}}\"\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers/{d3a2cd06-9531-46a5-b2aa-aad592fd9580}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers",
+										"{d3a2cd06-9531-46a5-b2aa-aad592fd9580}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Detail Customer -Invalid Id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n   \"phone\": \"{{$randomPhoneNumber}}\"\r\n   \"address\": \"{{$randomStreetAddress}}\"\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/{d3a2cd06-9531-46a5-b2aa-aad592fd9580}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"{d3a2cd06-9531-46a5-b2aa-aad592fd9580}"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 15:06:06 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=ecdqjoLQat93KwccKUG5rbg1RrbVO9kRVwCOo%2B4IhsH9FKSGrdTbtpi5FRoOx%2Fye44jFe4jpbOdLwKnXFY93HC2eefZQMKwupjLkraSHmWdJpDu6bjr2Av0MIi8KzgdPPkZl5T5Qag%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27e74be8f49b9f-SIN"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=35222&sent=111&recv=109&lost=0&retrans=0&sent_bytes=10175&recv_bytes=5255&delivery_rate=124504&cwnd=257&unsent_bytes=0&cid=bb02e314c147b913&ts=99382&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"Customer tidak ditemukan\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Update Customer",
+					"item": [
+						{
+							"name": "Update Customer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 200 OK status\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers/{{customerId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers",
+										"{{customerId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update Customer",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/{{customerId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"{{customerId}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 14:53:16 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=XWlVWhB6QgaXCnJrmhD6Z6E7Op2%2FS59gO1dG3WSH75Tzfalfx62C6btxoRGuCWvGLhoHzqyFFOCVIeQRast2O6CDHqk0poDEsIxO%2FrlzUR4KJ78xbnv85AiLmvAu6pTOXqK5SCSFlg%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27d4820f46d47b-SIN"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=29413&sent=82&recv=80&lost=0&retrans=1&sent_bytes=6670&recv_bytes=2815&delivery_rate=147812&cwnd=256&unsent_bytes=0&cid=4b352e19695816c1&ts=74464&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"name\": \"Donald Feeney\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Customer -Missing Name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 400 Bad Request\", () => {\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"pm.test(\"Return message fail\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"\\\"name\\\" is not allowed to be empty\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers/{{customerId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers",
+										"{{customerId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update Customer  Missing Name",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/{{customerId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"{{customerId}}"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 14:54:44 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "65"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=lqi9B7GuGXCS%2FxnjEV8wygWpr6V6G1DcDLCWiAv3iMLrWvLttrioYKtGVMEst%2BWYmh8huhWn8kDnSAghDn0G5HDbtq7DCibvgcVjNTAY10%2F1rBkIjZGxkUnO2zy73kUx8khEcmkTIA%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27d6a9d8373f6c-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=27917&sent=4&recv=5&lost=0&retrans=0&sent_bytes=2805&recv_bytes=1318&delivery_rate=102407&cwnd=251&unsent_bytes=0&cid=d9f6b966ef176811&ts=103&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"name\\\" is not allowed to be empty\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Customer -Invalid Name Data Type",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 400 Bad Request\", () => {\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"pm.test(\"Return message fail\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"\\\"name\\\" must be a string\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": 12,\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers/{{customerId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers",
+										"{{customerId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update Customer -Invalid Name Data Type",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": 12,\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/{{customerId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"{{customerId}}"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 14:58:30 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "55"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=cO7%2BIdBhazi8SFhlpPAGshwLiUoHOnYUTfIsTKCJYsu%2FZw0Q3qW2nXZYsUKz1Dc0aZjOmPhF3k8xOaHfBGd2m9HO7bccQ812Wbl4yY%2FCGbbd6%2BZl%2FEltJsuFMAfpvI4u0An4jdHMlA%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27dc2affa33e5b-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=29927&sent=24&recv=25&lost=0&retrans=0&sent_bytes=4192&recv_bytes=2043&delivery_rate=72313&cwnd=252&unsent_bytes=0&cid=1159f7ab0a02682e&ts=19073&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"name\\\" must be a string\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Customer -Invalid Adress Data type",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 400 Bad Request\", () => {\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"pm.test(\"Return message fail\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"\\\"address\\\" must be a string\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": 123,\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers/{{customerId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers",
+										"{{customerId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update Customer -Missing Invalid adress data type",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": 123,\r\n   \"description\": \"{{$randomCatchPhraseDescriptor}}\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/{{customerId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"{{customerId}}"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 14:56:45 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "58"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=uo3R2kooB8WQr%2BMEj2IO5tbO5be9x2zkTGilNcLmVvVkqq3llvz1%2FWc%2Fh3qfTxr%2BR2ErAGW6c334jlkijaPp8GH0y5lTVG9Z4K7cr%2F2ITjclkeLlssE81aOlewHE%2BqN4SS0NLvssmg%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27d99d895b81c5-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=31217&sent=25&recv=26&lost=0&retrans=0&sent_bytes=4198&recv_bytes=2034&delivery_rate=112393&cwnd=252&unsent_bytes=0&cid=fae1357e96ec47d6&ts=19877&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"address\\\" must be a string\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Customer -Invalid Description Data type Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 400 Bad Request\", () => {\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"pm.test(\"Return message fail\",()=>{\r",
+											"    var data = pm.response.json();\r",
+											"    pm.expect(data.message).to.eql(\"\\\"description\\\" must be a string\");\r",
+											"\r",
+											"})\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": 12\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers/{{customerId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers",
+										"{{customerId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update Customer -Invalid description Data type Copy",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"081234567890\",\r\n   \"address\": \"{{$randomStreetAddress}}\",\r\n   \"description\": 12\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/{{customerId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"{{customerId}}"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 14 Nov 2024 15:01:33 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "62"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=otUhe1yQq5%2F6MxTzJ5ByUhgZb4oLVMl5NQHLWdg1usNrljItEmeMjFHzU%2BH16bio8oZFCm%2BztrkKDl7%2BgJpVnucnaPhTTWZuGcGUyRXOAKx0lPuRtLLW0wzDuOpKrSf0R%2Bpc%2F5OsMQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e27e0a44d445fa2-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=25308&sent=55&recv=53&lost=0&retrans=0&sent_bytes=6237&recv_bytes=3513&delivery_rate=131153&cwnd=256&unsent_bytes=0&cid=c78bd79c14100406&ts=44941&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"fail\",\n    \"message\": \"\\\"description\\\" must be a string\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Delete Customer",
+					"item": [
+						{
+							"name": "Delete Customers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Returns 200 OK status\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Respon time is less than 2000\", ()=>{\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/customers/{{customerId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers",
+										"{{customerId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Delete Customers",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/customers/{{customerId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"{{customerId}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Fri, 15 Nov 2024 13:15:50 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "30"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "cf-cache-status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=U2BD5HaQ0Uihg%2BCk37eF7jEsg4V9mWooCdUFdwYgMRJ7OK0POg0MBc7MaXaTfTpKUKRafLY%2B0olMV39n6mEuBy9jg754%2FR8w7VlRgUCxkjkfTqvQiLyowh0MHbc%2BTK5eqcNPtrNTOw%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8e2f8327d9a44c6b-SIN"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										},
+										{
+											"key": "server-timing",
+											"value": "cfL4;desc=\"?proto=TCP&rtt=35369&sent=274&recv=266&lost=0&retrans=0&sent_bytes=15557&recv_bytes=8751&delivery_rate=114045&cwnd=257&unsent_bytes=0&cid=8f97c4a1e688a6d1&ts=260759&x=0\""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"data\": {}\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "inherit"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
