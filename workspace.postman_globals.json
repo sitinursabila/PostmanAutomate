@@ -1,0 +1,57 @@
+{
+	"id": "791d7a7b-0c0a-4c96-88f5-6c04e2728188",
+	"values": [
+		{
+			"key": "password",
+			"value": "pass1234",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "email",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://kasir-api.zelz.my.id",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "bearerToken",
+			"value": "",
+			"type": "secret",
+			"enabled": true
+		},
+		{
+			"key": "refreshToken",
+			"value": "",
+			"type": "secret",
+			"enabled": true
+		},
+		{
+			"key": "bear",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "categoryId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "customerId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2024-12-23T13:05:54.398Z",
+	"_postman_exported_using": "Postman/11.23.3"
+}
